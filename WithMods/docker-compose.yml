@@ -1,0 +1,21 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:java8
+    container_name: minecraft-server
+    ports:
+      - "25565:25565" # Porta padrão do Minecraft
+    environment:
+      EULA: "TRUE"                 # Aceite o EULA
+      TYPE: "FORGE"                # Servidor Forge (necessário para mods)
+      VERSION: "1.16.5"            # Versão do Minecraft (escolha compatível com os Mods)
+      FORGEVERSION: "36.2.20"       # Versão do Forge (compatível com a versao do Mine escolhida)
+      ENABLE_RCON: "true"          # Habilita o RCON (opcional), ferramenta para comandos do mundo do servidor
+      RCON_PASSWORD: "servidor123456" # Senha do RCON
+      MODRINTH_PROJECTS: |         # Mods que rodaram no Servidor  ex (pixelmon, jei, journeymap)
+    volumes:
+      - ./data:/data               # Persistência dos dados do servidor
+      - ./mods:/mods               # Pasta de mods
+      - ./config:/config           # Configuração personalizada (opcional)
+    stdin_open: true
+    tty: true
+    restart: always
